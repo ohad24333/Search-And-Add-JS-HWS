@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+
+        const arr = [] ;
+
+        function Init() {
+
+            AddEventToSearch()
+        }
+
+        function PapulateList(list) {    
+            document.getElementById("ul1").innerHTML = '';
+            for (const li of list) {
+                document.getElementById("ul1").innerHTML += `<li>${li}</li>`;
+            }           
+        }
+
+        function BtnAddClick() {    
+            let txtadd = document.getElementById("addinput").value;
+            arr.push(txtadd); 
+            document.getElementById("ul1").innerHTML +=  `<li>${txtadd}</li>`;
+        }
+
+        function AddEventToSearch() {
+            let searchinputelement = document.getElementById("searchinput");
+            searchinputelement.addEventListener('keyup', e => {
+                let searchtxt = e.target.value;
+                console.log(searchtxt);      
+                let matchedrows = arr.filter(row => {
+                    return row.includes(searchtxt);
+                })
+                PapulateList(matchedrows); 
+            })
+        }
+    </script>
+</head>
+
+<body onload="Init()">
+    <h1>Search And Add</h1>
+    <input type="text" id="addinput">
+    <button onclick="BtnAddClick()" id="addbtn">Add</button>
+    <br>
+    Search: <input type="text" id="searchinput">
+    <ul id="ul1"></ul>
+</body>
+
+</html>
